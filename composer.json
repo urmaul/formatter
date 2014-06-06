@@ -1,0 +1,24 @@
+{
+	"name": "urmaul/formatter",
+	"type": "library",
+	"description": "Rule-based string format.",
+	"keywords": ["formatter", "string", "format"],
+	"homepage": "https://github.com/urmaul/formatter",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Bogdan Kolbik"
+		}
+	],
+	"require": {
+		"php": ">=5.3"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"urmaul\\formatter\\": "src/"
+		}
+	}
+}
