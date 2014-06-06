@@ -65,7 +65,7 @@ class Formatter
 				return $this->between($value, $rule[0], $rule[1]);
 				
 			case 'trim':
-				$chars = isset($rule[0]) ? $rule[0] : '  '; // Some utf8 spaces added
+				$chars = isset($rule[0]) ? $rule[0] : '  \t\n\r\0\x0B'; // Some utf8 spaces added
 				return trim($value, $chars);
 				
 			case 'callback':
@@ -106,7 +106,7 @@ class Formatter
 	}
 	
 	/**
-	 * Returns text part between first occurence of $leftBorder and $rightBorder.
+	 * Returns string part between first occurence of $leftBorder and $rightBorder.
 	 * @param string $text text to look inside.
 	 * @param string $leftBorder left border substring.
 	 * @param string $rightBorder right border substring. End of file if not
