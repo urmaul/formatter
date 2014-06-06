@@ -65,7 +65,7 @@ class Formatter
 				return $this->between($value, $rule[0], $rule[1]);
 				
 			case 'trim':
-				$chars = isset($rule[0]) ? $rule[0] : '  \t\n\r\0\x0B'; // Some utf8 spaces added
+				$chars = isset($rule[0]) ? $rule[0] : "  \t\n\r\0\x0B"; // Some utf8 spaces added
 				return trim($value, $chars);
 				
 			case 'callback':
