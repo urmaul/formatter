@@ -71,6 +71,17 @@ class Formatter
 			case 'callback':
 				return call_user_func($rule[0], $value);
 
+			case 'grep':
+				$lines = explode("\n", $value);
+				$lines = array_filter($lines, function($line)use($rule){return strpos($line, $rule[0]) !== false;});
+				return implode("\n", $lines);
+
+			case 'stripTags':
+				if (isset($rule[0]))
+					return strip_tags($value, $rule[0]);
+				else
+					return strip_tags($value);
+
 			default:
 				throw new FormatterException('Unknown formatter action: "' . $action . '"');
 		}

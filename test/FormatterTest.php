@@ -73,6 +73,10 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 			array('a .', array('trim', ' .'), 'a'),
 			array('a .', array('trim', '.'), 'a '),
 			array('hello', array('callback', function($value) {return $value . ' world';}), 'hello world'),
+			array("spam\nham\nni\nhello", array('grep', 'am'), "spam\nham"),
+			array("spam\nham\nni\nhello", array('grep', 'world'), ''),
+			array('<strong>Spam</strong>: Ham', array('stripTags'), 'Spam: Ham'),
+			array('<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>', array('stripTags', '<p><a>'), '<p>Test paragraph.</p> <a href="#fragment">Other text</a>'),
 		);
 	}
 	
