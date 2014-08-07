@@ -77,6 +77,10 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 			array("spam\nham\nni\nhello", array('grep', 'world'), ''),
 			array('<strong>Spam</strong>: Ham', array('stripTags'), 'Spam: Ham'),
 			array('<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>', array('stripTags', '<p><a>'), '<p>Test paragraph.</p> <a href="#fragment">Other text</a>'),
+			array('aaa BbB bbb', array('remove', 'bbb'), 'aaa BbB '),
+			array('aaa BbB bbb', array('iremove', 'bbb'), 'aaa  '),
+			array('aaa BbB bbb', array('replace', 'bbb', 'ccc'), 'aaa BbB ccc'),
+			array('aaa BbB bbb', array('ireplace', 'bbb', 'ccc'), 'aaa ccc ccc'),
 		);
 	}
 	
@@ -92,6 +96,30 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 		$actual = $formatter->formatValue($value, $config);
 		$this->assertSame($expected, $actual);
 	}
+	
+	
+	public function testFormatValueInsensitiveProvider()
+	{
+		return array(
+			array('ci aaa BbB bbb', array('remove', 'bbb'), 'ci aaa  '),
+			array('ci aaa BbB bbb', array('replace', 'bbb', 'ccc'), 'ci aaa ccc ccc'),
+		);
+	}
+	
+	/**
+	 * @dataProvider testFormatValueInsensitiveProvider
+	 * @param mixed $value
+	 * @param array $config
+	 * @param mixed $expected
+	 */
+	public function testFormatValueInsensitive($value, $config, $expected)
+	{
+		$formatter = new Formatter();
+		$formatter->caseInsensitive = true;
+		$actual = $formatter->formatValue($value, $config);
+		$this->assertSame($expected, $actual);
+	}
+	
 	
 	/**
 	 * @expectedException urmaul\formatter\FormatterException

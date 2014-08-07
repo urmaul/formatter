@@ -9,6 +9,12 @@ class Formatter
 	 */
 	public $rules;
 	
+	/**
+	 * If true - all actons are case insensitive
+	 * @var boolean 
+	 */
+	public $caseInsensitive = false;
+	
 	public function __construct($rules = array())
 	{
 		$this->rules = $rules;
@@ -44,10 +50,22 @@ class Formatter
 				return $this->cut($value, $rule[0], true);
 			
 			case 'remove':
-				return str_replace($rule[0], '', $value);
+				if (!$this->caseInsensitive)
+					return str_replace($rule[0], '', $value);
 			
+				// Otherwise fallthrough
+			case 'iremove':
+				$pattern = sprintf('/%s/iu', preg_quote($rule[0], '/'));
+				return preg_replace($pattern, '', $value);
+				
 			case 'replace':
-				return str_replace($rule[0], $rule[1], $value);
+				if (!$this->caseInsensitive)
+					return str_replace($rule[0], $rule[1], $value);
+				
+				// Otherwise fallthrough
+			case 'ireplace':
+				$pattern = sprintf('/%s/iu', preg_quote($rule[0], '/'));
+				return preg_replace($pattern, preg_quote($rule[1]), $value);
 			
 			case 'removeMatch':
 				return preg_replace($rule[0], '', $value);
