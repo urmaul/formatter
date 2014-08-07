@@ -55,8 +55,7 @@ class Formatter
 			
 				// Otherwise fallthrough
 			case 'iremove':
-				$pattern = sprintf('/%s/iu', preg_quote($rule[0], '/'));
-				return preg_replace($pattern, '', $value);
+				return $this->ireplace($rule[0], '', $value);
 				
 			case 'replace':
 				if (!$this->caseInsensitive)
@@ -64,8 +63,7 @@ class Formatter
 				
 				// Otherwise fallthrough
 			case 'ireplace':
-				$pattern = sprintf('/%s/iu', preg_quote($rule[0], '/'));
-				return preg_replace($pattern, preg_quote($rule[1]), $value);
+				return $this->ireplace($rule[0], $rule[1], $value);
 			
 			case 'removeMatch':
 				return preg_replace($rule[0], '', $value);
@@ -103,6 +101,24 @@ class Formatter
 			default:
 				throw new FormatterException('Unknown formatter action: "' . $action . '"');
 		}
+	}
+	
+	public function ireplace($search, $replacement, $string)
+	{
+		$quote = function($str) {
+			return preg_quote($str, '/');
+		};
+		
+		if (is_array($search)) {
+			$word = '(' . implode('|', array_map($quote, $search)) . ')';
+			
+		} else {
+			$word = call_user_func($quote, $search);
+		}
+		
+		$pattern = sprintf('/%s/iu', $word);
+		$replacement = preg_quote($replacement);
+		return preg_replace($pattern, $replacement, $string);
 	}
 	
 	public function cut($text, $delimiters, $right = false)

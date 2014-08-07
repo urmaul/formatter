@@ -79,6 +79,7 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 			array('<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>', array('stripTags', '<p><a>'), '<p>Test paragraph.</p> <a href="#fragment">Other text</a>'),
 			array('aaa BbB bbb', array('remove', 'bbb'), 'aaa BbB '),
 			array('aaa BbB bbb', array('iremove', 'bbb'), 'aaa  '),
+			array('aaa BbB bbb ddd Ccc', array('iremove', array('bbb', 'ccc')), 'aaa   ddd '),
 			array('aaa BbB bbb', array('replace', 'bbb', 'ccc'), 'aaa BbB ccc'),
 			array('aaa BbB bbb', array('ireplace', 'bbb', 'ccc'), 'aaa ccc ccc'),
 		);
@@ -102,6 +103,7 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array('ci aaa BbB bbb', array('remove', 'bbb'), 'ci aaa  '),
+			array('aaa BbB bbb ddd Ccc', array('remove', array('bbb', 'ccc')), 'aaa   ddd '),
 			array('ci aaa BbB bbb', array('replace', 'bbb', 'ccc'), 'ci aaa ccc ccc'),
 		);
 	}
