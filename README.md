@@ -24,3 +24,4 @@ composer require urmaul/formatter dev-master
 * **callback(callable)** - processes string with callback.
 * **grep(substring)** - returns lines containing substring.
 * **stripTags([allowable_tags])** - strips HTML and PHP tags from a string. See [strip_tags](http://www.php.net/manual/en/function.strip-tags.php).
+* **iconv([encoding_from, encoding_to])** - converts character encoding. Defaults are "UTF-8" - "UTF-8//IGNORE" which remove invalid characters from utf-8 string.

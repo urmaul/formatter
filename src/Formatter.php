@@ -98,6 +98,10 @@ class Formatter
 				else
 					return strip_tags($value);
 
+			case 'iconv':
+				$rule += array('UTF-8', 'UTF-8//IGNORE');
+				return iconv($rule[0], $rule[1], $value);
+
 			default:
 				throw new FormatterException('Unknown formatter action: "' . $action . '"');
 		}
