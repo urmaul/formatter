@@ -41,6 +41,22 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 				),
 				array('a' => '123', 'b' => '78'),
 			),
+			array(
+				array('a' => 'abc'),
+				array(
+					'caseInsensitive' => false,
+					array('a', 'replace', 'B', 'D'),
+				),
+				array('a' => 'abc'),
+			),
+			array(
+				array('a' => 'abc'),
+				array(
+					'caseInsensitive' => true,
+					array('a', 'replace', 'B', 'D'),
+				),
+				array('a' => 'aDc'),
+			),
 		);
 	}
 	

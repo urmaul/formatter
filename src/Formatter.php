@@ -17,6 +17,10 @@ class Formatter
 	
 	public function __construct($rules = array())
 	{
+		if (isset($rules['caseInsensitive'])) {
+			$this->caseInsensitive = $rules['caseInsensitive'];
+			unset($rules['caseInsensitive']);
+		}
 		$this->rules = $rules;
 	}
 	
