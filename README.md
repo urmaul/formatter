@@ -3,6 +3,10 @@
 Rule-based string format.
 
 [![Build Status](https://travis-ci.org/urmaul/url.svg)](https://travis-ci.org/urmaul/formatter)
+[![Latest Stable Version](https://poser.pugx.org/urmaul/formatter/v/stable.svg)](https://packagist.org/packages/urmaul/formatter)
+[![Total Downloads](https://poser.pugx.org/urmaul/formatter/downloads.svg)](https://packagist.org/packages/urmaul/formatter)
+[![Latest Unstable Version](https://poser.pugx.org/urmaul/formatter/v/unstable.svg)](https://packagist.org/packages/urmaul/formatter)
+[![License](https://poser.pugx.org/urmaul/formatter/license.svg)](https://packagist.org/packages/urmaul/formatter)
 
 ## Installing
 
