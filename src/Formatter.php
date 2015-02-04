@@ -48,10 +48,20 @@ class Formatter
 		$action = array_shift($rule);
 		switch ($action) {
 			case 'cut':
-				return $this->cut($value, $rule[0]);
+				if (!$this->caseInsensitive)
+					return $this->cut($value, $rule[0]);
+				
+				// Otherwise fallthrough
+			case 'icut':
+				return $this->icut($value, $rule[0]);
 				
 			case 'rcut':
-				return $this->cut($value, $rule[0], true);
+				if (!$this->caseInsensitive)
+					return $this->cut($value, $rule[0], true);
+				
+				// Otherwise fallthrough
+			case 'ircut':
+				return $this->icut($value, $rule[0], true);
 			
 			case 'remove':
 				if (!$this->caseInsensitive)
@@ -136,6 +146,24 @@ class Formatter
 		
 		foreach ($delimiters as $delimiter) {
 			$pos = mb_strpos($text, $delimiter);
+			if ($pos !== false) {
+				if ($right)
+					$text = mb_substr($text, $pos + mb_strlen($delimiter));
+				else
+					$text = mb_substr($text, 0 , $pos);
+			}
+		}
+
+		return $text;
+	}
+	
+	public function icut($text, $delimiters, $right = false)
+	{
+		if (!is_array($delimiters))
+			$delimiters = array($delimiters);
+		
+		foreach ($delimiters as $delimiter) {
+			$pos = mb_stripos($text, $delimiter);
 			if ($pos !== false) {
 				if ($right)
 					$text = mb_substr($text, $pos + mb_strlen($delimiter));

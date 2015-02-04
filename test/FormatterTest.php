@@ -98,6 +98,9 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 			array('aaa BbB bbb ddd Ccc', array('iremove', array('bbb', 'ccc')), 'aaa   ddd '),
 			array('aaa BbB bbb', array('replace', 'bbb', 'ccc'), 'aaa BbB ccc'),
 			array('aaa BbB bbb', array('ireplace', 'bbb', 'ccc'), 'aaa ccc ccc'),
+			array('AaA BbB CcC', array('cut', 'bbb'), 'AaA BbB CcC'),
+			array('AaA BbB CcC', array('icut', 'bbb'), 'AaA '),
+			array('AaA BbB CcC', array('ircut', 'bbb'), ' CcC'),
 		);
 	}
 	
