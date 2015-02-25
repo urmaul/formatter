@@ -135,7 +135,7 @@ class Formatter
 		}
 		
 		$pattern = sprintf('/%s/iu', $word);
-		$replacement = preg_quote($replacement);
+		$replacement = str_replace('$', '\$', $replacement);
 		return preg_replace($pattern, $replacement, $string);
 	}
 	
