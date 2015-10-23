@@ -103,6 +103,7 @@ class FormatterTest extends PHPUnit_Framework_TestCase
 			array('AaA BbB CcC', array('ircut', 'bbb'), ' CcC'),
 			array('foo,bar', array('ireplace', ',', ' $0 '), 'foo $0 bar'),
 			array('123,45', array('ireplace', ',', '.'), '123.45'),
+			array('Management                     Assistant', array('stripWhitespaces'), 'Management Assistant'),
 		);
 	}
 	
