@@ -115,6 +115,9 @@ class Formatter
 			case 'iconv':
 				$rule += array('UTF-8', 'UTF-8//IGNORE');
 				return iconv($rule[0], $rule[1], $value);
+				
+			case 'stripWhitespaces':
+				return $this->stripWhitespaces($value);
 
 			default:
 				throw new FormatterException('Unknown formatter action: "' . $action . '"');
@@ -195,5 +198,24 @@ class Formatter
 		if ($offset2 === false)
 			return false;
 		return substr($text, $offset, $offset2-$offset);
+	}
+	
+	/**
+	 * Returns string without unprintable characters
+	 * @param $string
+	 * @return mixed|string
+	 */
+	public static function stripWhitespaces($string) {
+		$old_string = $string;
+		$string = strip_tags($string);
+		$string = preg_replace('/([^\pL\pN\pP\pS\pZ])|([\xC2\xA0])/u', ' ', $string);
+		$string = str_replace('  ',' ', $string);
+		$string = trim($string);
+
+		if ($string === $old_string) {
+			return $string;
+		} else {
+			return self::stripWhitespaces($string);
+		}
 	}
 }
