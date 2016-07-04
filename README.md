@@ -1,6 +1,6 @@
 # Formatter
 
-Rule-based string format.
+Rule-based string formatters. Made for polishing parsed data.
 
 [![Build Status](https://travis-ci.org/urmaul/url.svg)](https://travis-ci.org/urmaul/formatter)
 [![Latest Stable Version](https://poser.pugx.org/urmaul/formatter/v/stable.svg)](https://packagist.org/packages/urmaul/formatter)
@@ -13,6 +13,20 @@ Rule-based string format.
 ``
 composer require urmaul/formatter dev-master
 ``
+
+## Using
+
+~~~php
+$values = ['foo' => '  bar  ', 'spam' => 'ham | foo | bar'];
+
+$formatter = new Formatter([
+    ['foo', 'trim'],
+    ['spam', 'cut', ' | '],
+]);
+$values = $formatter->format($values);
+
+// $values = ['foo' => 'bar', 'spam' => 'ham'];
+~~~
 
 ## Actions
 
